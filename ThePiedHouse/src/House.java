@@ -122,7 +122,6 @@ public class House {
 
 
   public void breakRandomWindow() {
-    if (centralUnit.isAlarmOn()) {
       List<WindowDetector> allDetectors = new ArrayList<>();
       for (Room room : roomList) {
         List<WindowDetector> windowDetectorList = room.getWindowDetectorList();
@@ -135,16 +134,10 @@ public class House {
         int windowIndex = random.nextInt(windowListSize);
         WindowDetector window = allDetectors.get(windowIndex);
         window.breakWindow(window);
-      } else {
-        System.out.println("No windows available.");
       }
-    } else {
-      System.out.println("The alarm is off. Cannot open windows.");
-    }
   }
 
   public void openRandomDoor() {
-    if (centralUnit.isAlarmOn()) {
       List<DoorDetector> allDetectors = new ArrayList<>();
       for (Room room : roomList) {
         List<DoorDetector> doorDetectorList = room.getDoorDetectorList();
@@ -157,16 +150,10 @@ public class House {
         int doorIndex = random.nextInt(doorDetectorListSize);
         DoorDetector door = allDetectors.get(doorIndex);
         door.open(door);
-      } else {
-        System.out.println("No doors available.");
       }
-    } else {
-      System.out.println("The alarm is off. Cannot open door.");
-    }
   }
 
   public void breakRandomDoor() {
-    if (centralUnit.isAlarmOn()) {
       List<DoorAlarm> allDetectors = new ArrayList<>();
       for (Room room : roomList) {
         List<DoorAlarm> doorAlarmList = room.getDooralarmList();
@@ -179,12 +166,7 @@ public class House {
         int doorIndex = random.nextInt(doorAlarmListSize);
         DoorAlarm door = allDetectors.get(doorIndex);
         door.breakDoor(door);
-      } else {
-        System.out.println("No doors available.");
       }
-    } else {
-      System.out.println("The alarm is off. Cannot open door.");
-    }
   }
 
   public void triggerSmokeDetector() {

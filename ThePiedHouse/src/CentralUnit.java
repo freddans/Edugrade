@@ -76,9 +76,11 @@ public class CentralUnit {
           break;
         case 6:
           if (house.getRoomList().get(4).isSecretDocuments()) {
-            house.getRoomList().get(4).setSecretDocuments(true);
-          } else {
             house.getRoomList().get(4).setSecretDocuments(false);
+            house.getRoomList().get(4).removeDoorAlarm("Jian Yangs Door");
+          } else {
+            house.getRoomList().get(4).setSecretDocuments(true);
+            house.getRoomList().get(4).addDoorAlarm("Jian Yangs Door");
           }
           break;
         case 7:
@@ -108,6 +110,12 @@ public class CentralUnit {
             house.triggerSmokeDetector();
           }
           break;
+        case 10:
+          for (Room room : house.getRoomList()) {
+            for (int i = 0; i < room.getDooralarmList().size(); i++) {
+              System.out.println(room.getDooralarmList().get(i).getName());
+            }
+          }
         case 12:
           System.out.println("Exiting program");
           break;

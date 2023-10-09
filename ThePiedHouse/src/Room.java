@@ -39,6 +39,16 @@ public class Room {
     dooralarmList.add(doorAlarm);
   }
 
+  // Remove door alarm
+  public void removeDoorAlarm(String alarmName) {
+    for (DoorAlarm alarm : dooralarmList) {
+      if (alarm.getName().equals(alarmName)) {
+        dooralarmList.remove(alarm);
+        return;
+      }
+    }
+  }
+
   // Add smoke detector
   public void addSmokeDetector(String name) {
     SmokeDetector smokeDetector = new SmokeDetector(name);
