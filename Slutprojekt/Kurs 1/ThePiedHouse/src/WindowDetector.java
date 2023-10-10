@@ -7,18 +7,6 @@ public class WindowDetector {
     this.name = name;
   }
 
-  // Methods
-
-  // Open window
-  public void open() {
-      setOpen(true);
-  }
-
-  // Break window
-  public void breakWindow() {
-    setBroken(true);
-  }
-
   // Getters and Setters
   public String getName() {
     return name;

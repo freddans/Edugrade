@@ -109,7 +109,7 @@ public class House {
     if (windowListSize > 0) {
       int windowIndex = random.nextInt(windowListSize);
       WindowDetector window = allDetectors.get(windowIndex);
-      window.open();
+      window.setOpen(true);
     }
   }
 
@@ -126,7 +126,7 @@ public class House {
     if (windowListSize > 0) {
       int windowIndex = random.nextInt(windowListSize);
       WindowDetector window = allDetectors.get(windowIndex);
-      window.breakWindow();
+      window.setBroken(true);
     }
   }
 
@@ -142,7 +142,7 @@ public class House {
     if (doorDetectorListSize > 0) {
       int doorIndex = random.nextInt(doorDetectorListSize);
       DoorDetector door = allDetectors.get(doorIndex);
-      door.open();
+      door.setOpen(true);
     }
   }
 
@@ -158,7 +158,7 @@ public class House {
     if (doorAlarmListSize > 0) {
       int doorIndex = random.nextInt(doorAlarmListSize);
       DoorAlarm door = allDetectors.get(doorIndex);
-      door.breakDoor();
+      door.setBroken(true);
     }
   }
 

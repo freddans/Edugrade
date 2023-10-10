@@ -7,9 +7,6 @@ public class MotionDetector {
     this.name = name;
   }
 
-  // Methods
-
-
   // Getters and Setters
   public String getName() {
     return name;
