@@ -7,14 +7,6 @@ public class DoorDetector {
     this.name = name;
   }
 
-  // Methods
-
-  // Open door
-  public void open() {
-    open = true;
-    //System.out.println(this.getName() + " -> Door opened");
-  }
-
   // Getters and Setters
   public String getName() {
     return name;

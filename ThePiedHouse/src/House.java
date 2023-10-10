@@ -4,9 +4,11 @@ import java.util.Random;
 
 public class House {
   private String owner = "Erlich Bachman";
+
+  // Initialize Room object
   private Random random = new Random();
 
-  private CentralUnit centralUnit;
+  // Initialize rooms
   private Room garage;
   private Room livingRoom;
   private Room kitchen;
@@ -107,7 +109,7 @@ public class House {
     if (windowListSize > 0) {
       int windowIndex = random.nextInt(windowListSize);
       WindowDetector window = allDetectors.get(windowIndex);
-      window.open();
+      window.setOpen(true);
     }
   }
 
@@ -124,7 +126,7 @@ public class House {
     if (windowListSize > 0) {
       int windowIndex = random.nextInt(windowListSize);
       WindowDetector window = allDetectors.get(windowIndex);
-      window.breakWindow();
+      window.setBroken(true);
     }
   }
 
@@ -140,7 +142,7 @@ public class House {
     if (doorDetectorListSize > 0) {
       int doorIndex = random.nextInt(doorDetectorListSize);
       DoorDetector door = allDetectors.get(doorIndex);
-      door.open();
+      door.setOpen(true);
     }
   }
 
@@ -156,7 +158,7 @@ public class House {
     if (doorAlarmListSize > 0) {
       int doorIndex = random.nextInt(doorAlarmListSize);
       DoorAlarm door = allDetectors.get(doorIndex);
-      door.breakDoor();
+      door.setBroken(true);
     }
   }
 
@@ -172,7 +174,7 @@ public class House {
     if (smokeDetectorListSize > 0) {
       int smokeIndex = random.nextInt(smokeDetectorListSize);
       SmokeDetector smoke = allDetectors.get(smokeIndex);
-      smoke.theSmokeDetector();
+      smoke.setSmokeDetected(true);
     } else {
       System.out.println("No smoke detectors available.");
     }
@@ -196,15 +198,21 @@ public class House {
     }
   }
 
-  public void triggerMotionBackyard() {
-
-    List<MotionDetector> backyardDetectors = backYard.getMotionDetectorList();
-
-    if (!backyardDetectors.isEmpty()) {
-      int motionIndex = random.nextInt(backyardDetectors.size());
-      MotionDetector motion = backyardDetectors.get(motionIndex);
-      motion.setMotion(true);
+  // Check backyard Motion Detector
+  public MotionDetector checkBackYardMotionDetector() {
+    List<MotionDetector> allDetectors = new ArrayList<>();
+    for (Room room : roomList) {
+      List<MotionDetector> motionDetectorList = backYard.getMotionDetectorList();
+      allDetectors.addAll(motionDetectorList);
     }
+
+    for (MotionDetector detector : allDetectors) {
+      if (detector.isMotion()) {
+        return detector;
+      }
+    }
+
+    return null;
   }
 
   // check motion detector

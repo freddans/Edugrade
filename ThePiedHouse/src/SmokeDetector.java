@@ -8,12 +8,6 @@ public class SmokeDetector {
   }
 
   // Methods
-  public void theSmokeDetector() {
-    smokeDetected = true;
-    //System.out.println(this.getName() + " -> Smoke detected");
-    sprinklerSystem();
-  }
-
   public void sprinklerSystem() {
     if (smokeDetected) {
       System.out.println(this.getName() + " -> Sprinklersystem started");

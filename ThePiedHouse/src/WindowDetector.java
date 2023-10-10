@@ -2,25 +2,9 @@ public class WindowDetector {
   private String name;
   private boolean open = false;
   private boolean broken = false;
-  //private Siren siren = new Siren();
 
   public WindowDetector(String name) {
     this.name = name;
-  }
-
-  // Methods
-
-  // Open window
-  public void open() {
-      setOpen(true);
-      //System.out.println(this.getName() + " -> Window open");
-  }
-
-  // Break window
-  public void breakWindow() {
-    setBroken(true);
-    //System.out.println(this.getName() + " -> Window broken");
-    //siren.triggerSirens();
   }
 
   // Getters and Setters

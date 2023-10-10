@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -16,9 +14,7 @@ public class CentralUnit {
     this.house = new House();
   }
 
-
   // Methods
-
 
   // Menu
   public void menu() {
@@ -54,7 +50,7 @@ public class CentralUnit {
           if (alarmOn) {
             WindowDetector wd = house.checkWindowDetector();
             if (wd != null) {
-              System.out.println("CentralUnit:  " + wd.getName() + " -> is open");
+              System.out.println("CentralUnit: " + wd.getName() + " -> is open");
             }
           } else {
             System.out.println("no alarm active");
@@ -65,7 +61,7 @@ public class CentralUnit {
           if (alarmOn) {
             WindowDetector wd = house.checkWindowDetector();
             if (wd != null) {
-              System.out.println("CentralUnit:  " + wd.getName() + " -> is broken");
+              System.out.println("CentralUnit: " + wd.getName() + " -> is broken");
               sirens.triggerSirens();
             } else {
               System.out.println("no window detected");
@@ -79,7 +75,7 @@ public class CentralUnit {
           if (alarmOn) {
             DoorDetector dd = house.checkDoorDetector();
             if (dd != null) {
-              System.out.println("CentralUnit:  " + dd.getName() + " -> is open");
+              System.out.println("CentralUnit: " + dd.getName() + " -> is open");
             }
           } else {
             System.out.println("no alarm active");
@@ -90,7 +86,7 @@ public class CentralUnit {
           if (alarmOn) {
             DoorAlarm da = house.checkDoorAlarm();
             if (da != null) {
-              System.out.println("CentralUnit:  " + da.getName() + " -> is broken");
+              System.out.println("CentralUnit: " + da.getName() + " -> is broken");
               sirens.triggerSirens();
             }
           } else {
@@ -110,7 +106,7 @@ public class CentralUnit {
           house.triggerSmokeDetector();
           SmokeDetector sd = house.checkSmokeDetector();
           if (sd != null) {
-            System.out.println("CentralUnit:  " + sd.getName() + " -> smoke detected");
+            System.out.println("CentralUnit: " + sd.getName() + " -> smoke detected");
             sirens.triggerSirens();
             sd.sprinklerSystem();
           }
@@ -127,20 +123,56 @@ public class CentralUnit {
           }
           break;
         case 9:
-          Random random = new Random();
-          int randomNr = random.nextInt(4) + 1;
+
           if (alarmOn) {
+            Random random = new Random();
+            int randomNr = random.nextInt(4) + 1;
+
             if (randomNr == 1) {
               house.breakRandomWindow();
+              if (alarmOn) {
+                WindowDetector wd = house.checkWindowDetector();
+                if (wd != null) {
+                  System.out.println("CentralUnit: " + wd.getName() + " -> is broken");
+                  sirens.triggerSirens();
+                } else {
+                  System.out.println("no window detected");
+                }
+              }
             } else if (randomNr == 2) {
               house.breakRandomDoor();
+              if (alarmOn) {
+                DoorAlarm da = house.checkDoorAlarm();
+                if (da != null) {
+                  System.out.println("CentralUnit: " + da.getName() + " -> is broken");
+                  sirens.triggerSirens();
+                }
+              } else {
+                System.out.println("no alarm active");
+              }
             } else if (randomNr == 3) {
               house.triggerSmokeDetector();
+              SmokeDetector sd2 = house.checkSmokeDetector();
+              if (sd2 != null) {
+                System.out.println("CentralUnit: " + sd2.getName() + " -> smoke detected");
+                sirens.triggerSirens();
+                sd2.sprinklerSystem();
+              }
             } else if (randomNr == 4) {
-              house.triggerMotionBackyard();
+              house.triggerMotionDetector();
+              MotionDetector moD = house.checkBackYardMotionDetector();
+              if (moD != null) {
+                System.out.println(moD.getName() + " -> motion detected");
+              }
             }
           } else {
             house.triggerSmokeDetector();
+            SmokeDetector sd2 = house.checkSmokeDetector();
+            if (sd2 != null) {
+              System.out.println("CentralUnit: " + sd2.getName() + " -> smoke detected");
+              sirens.triggerSirens();
+              sd2.sprinklerSystem();
+            }
           }
           break;
         case 10:
@@ -151,9 +183,10 @@ public class CentralUnit {
           System.out.println("Exiting program");
           break;
         default:
-          System.out.println("Invalid number. Input number between 1-10.");
+          System.out.println("Invalid number. Input number between 1-11.");
       }
-    } while (choice != 11);
+    }
+    while (choice != 11);
   }
 
   // Getters and Setters

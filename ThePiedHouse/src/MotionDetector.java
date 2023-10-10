@@ -7,13 +7,6 @@ public class MotionDetector {
     this.name = name;
   }
 
-  // Methods
-  public void motionDetected() {
-    if (isMotion()) {
-      System.out.println(this.getName() + " -> detected motion");
-    }
-  }
-
   // Getters and Setters
   public String getName() {
     return name;

@@ -20,26 +20,22 @@ public class Room {
 
   // Methods
 
-
-  // Add window detector
+  // Add detectors
   public void addWindowDetector(String name) {
     WindowDetector windowDetector = new WindowDetector(name);
     windowDetectorList.add(windowDetector);
   }
 
-  // Add door detector
   public void addDoorDetector(String name) {
     DoorDetector doorDetector = new DoorDetector(name);
     doorDetectorList.add(doorDetector);
   }
 
-  // Add door alarm
   public void addDoorAlarm(String name) {
     DoorAlarm doorAlarm = new DoorAlarm(name);
     dooralarmList.add(doorAlarm);
   }
 
-  // Remove door alarm
   public void removeDoorAlarm(String alarmName) {
     for (DoorAlarm alarm : dooralarmList) {
       if (alarm.getName().equals(alarmName)) {
@@ -49,23 +45,17 @@ public class Room {
     }
   }
 
-  // Add smoke detector
   public void addSmokeDetector(String name) {
     SmokeDetector smokeDetector = new SmokeDetector(name);
     smokeDetectorList.add(smokeDetector);
   }
 
-  // Add motion detector
   public void addMotionDetector(String name) {
     MotionDetector motionDetector = new MotionDetector(name);
     motionDetectorList.add(motionDetector);
   }
 
   // Getters and Setters
-  public String getName() {
-    return name;
-  }
-
   public boolean isSecretDocuments() {
     return secretDocuments;
   }
