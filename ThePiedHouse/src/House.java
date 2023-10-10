@@ -8,24 +8,13 @@ public class House {
   // Initialize Room object
   private Random random = new Random();
 
-  // Initialize rooms
-  private Room garage;
-  private Room livingRoom;
-  private Room kitchen;
-  private Room bedRoom1;
-  private Room bedRoom2;
-  private Room bedRoom3;
-  private Room bedRoom4;
-  private Room bedRoom5;
-  private Room hallWay;
-  private Room backYard;
-
   // List of rooms
   private List<Room> roomList = new ArrayList<>();
 
   public House() {
+    // Initialize rooms and add to lists
     // Garage
-    garage = new Room("Garage");
+    Room garage = new Room("Garage");
     garage.addWindowDetector("Garage Window");
     garage.addDoorDetector("Garage Door");
     garage.addDoorAlarm("Garage Port");
@@ -33,7 +22,7 @@ public class House {
     roomList.add(garage);
 
     // Living room
-    livingRoom = new Room("Living Room");
+    Room livingRoom = new Room("Living Room");
     livingRoom.addWindowDetector("Living Room Window 1");
     livingRoom.addWindowDetector("Living Room Window 2");
     livingRoom.addDoorDetector("Living Room Door");
@@ -42,13 +31,13 @@ public class House {
     roomList.add(livingRoom);
 
     // Kitchen
-    kitchen = new Room("Kitchen");
+    Room kitchen = new Room("Kitchen");
     kitchen.addWindowDetector("Kitchen Window");
     kitchen.addSmokeDetector("Kitchen Smoke Detector");
     roomList.add(kitchen);
 
     // Bedroom 1
-    bedRoom1 = new Room("Erlich Bachmans Room");
+    Room bedRoom1 = new Room("Erlich Bachmans Room");
     bedRoom1.addWindowDetector("Erlich Bachmans Window 1");
     bedRoom1.addWindowDetector("Erlich Bachmans Window 2");
     bedRoom1.addDoorDetector("Erlich Bachmans Door");
@@ -56,35 +45,35 @@ public class House {
     roomList.add(bedRoom1);
 
     // Bedroom 2
-    bedRoom2 = new Room("Jian Yangs Room");
+    Room bedRoom2 = new Room("Jian Yangs Room");
     bedRoom2.addWindowDetector("Jian Yangs Window");
     bedRoom2.addDoorDetector("Jian Yangs Door");
     bedRoom2.addSmokeDetector("Jian Yangs Smoke Detector");
     roomList.add(bedRoom2);
 
     // Bedroom 3
-    bedRoom3 = new Room("Richard Hendricks Room");
+    Room bedRoom3 = new Room("Richard Hendricks Room");
     bedRoom3.addWindowDetector("Richard Hendricks Window");
     bedRoom3.addDoorDetector("Richard Hendricks Door");
     bedRoom3.addSmokeDetector("Richard Hendricks Smoke Detector");
     roomList.add(bedRoom3);
 
     // Bedroom 4
-    bedRoom4 = new Room("Bertram Gilfoyles Room");
+    Room bedRoom4 = new Room("Bertram Gilfoyles Room");
     bedRoom4.addWindowDetector("Bertram Gilfoyles Window");
     bedRoom4.addDoorDetector("Bertram Gilfoyles Door");
     bedRoom4.addSmokeDetector("Bertram Gilfoyles Smoke Detector");
     roomList.add(bedRoom4);
 
     // Bedroom 5
-    bedRoom5 = new Room("Dinesh Chugtais Room");
+    Room bedRoom5 = new Room("Dinesh Chugtais Room");
     bedRoom5.addWindowDetector("Dinesh Chugtais Window");
     bedRoom5.addDoorDetector("Dinesh Chugtais Door");
     bedRoom5.addSmokeDetector("Dinesh Chugtais Smoke Detector");
     roomList.add(bedRoom5);
 
     // Hallway
-    hallWay = new Room("Hallway");
+    Room hallWay = new Room("Hallway");
     hallWay.addWindowDetector("Hallway Window Detector");
     hallWay.addDoorAlarm("Hallway Entry Door");
     hallWay.addSmokeDetector("Hallway Smoke Detector");
@@ -92,7 +81,7 @@ public class House {
     roomList.add(hallWay);
 
     // Backyard
-    backYard = new Room("Backyard");
+    Room backYard = new Room("Backyard");
     backYard.addMotionDetector("Backyarad Motion Detector");
     roomList.add(backYard);
   }
@@ -199,20 +188,22 @@ public class House {
   }
 
   // Check backyard Motion Detector
-  public MotionDetector checkBackYardMotionDetector() {
-    List<MotionDetector> allDetectors = new ArrayList<>();
+  public boolean checkBackYardMotionDetector() {
     for (Room room : roomList) {
-      List<MotionDetector> motionDetectorList = backYard.getMotionDetectorList();
-      allDetectors.addAll(motionDetectorList);
-    }
-
-    for (MotionDetector detector : allDetectors) {
-      if (detector.isMotion()) {
-        return detector;
+      if (room.getName().equalsIgnoreCase("backyard")) {
+        return room.getMotionDetectorList().get(0).isMotion();
       }
     }
 
-    return null;
+    return false;
+  }
+
+  public void triggerBackYardMotionDetector() {
+    for (Room room : roomList) {
+      if (room.getName().equalsIgnoreCase("backyard")) {
+        room.getMotionDetectorList().get(0).setMotion(true);
+      }
+    }
   }
 
   // check motion detector

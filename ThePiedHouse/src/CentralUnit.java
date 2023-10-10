@@ -128,6 +128,8 @@ public class CentralUnit {
             Random random = new Random();
             int randomNr = random.nextInt(4) + 1;
 
+            System.out.println(randomNr);
+
             if (randomNr == 1) {
               house.breakRandomWindow();
               if (alarmOn) {
@@ -158,11 +160,10 @@ public class CentralUnit {
                 sirens.triggerSirens();
                 sd2.sprinklerSystem();
               }
-            } else if (randomNr == 4) {
-              house.triggerMotionDetector();
-              MotionDetector moD = house.checkBackYardMotionDetector();
-              if (moD != null) {
-                System.out.println(moD.getName() + " -> motion detected");
+            } else {
+              house.triggerBackYardMotionDetector();
+              if (house.checkBackYardMotionDetector()) {
+                System.out.println("CentralUnit: Backyard -> motion detected");
               }
             }
           } else {
