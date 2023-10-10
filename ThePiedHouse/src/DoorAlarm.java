@@ -1,18 +1,17 @@
 public class DoorAlarm {
   private String name;
-  private boolean broken;
-  private Siren siren = new Siren();
+  private boolean broken = false;
+  //private Siren siren = new Siren();
 
   // Constructor
   public DoorAlarm(String name) {
     this.name = name;
-    this.broken = broken;
   }
 
-  public void breakDoor(DoorAlarm door) {
+  public void breakDoor() {
     broken = true;
-    System.out.println(door.getName() + " -> Door broken");
-    siren.triggerSirens();
+    //System.out.println(this.getName() + " -> Door broken");
+    //siren.triggerSirens();
   }
 
   // Getters and Setters

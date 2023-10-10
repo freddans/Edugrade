@@ -5,13 +5,13 @@ public class MotionDetector {
   // Constructor
   public MotionDetector(String name) {
     this.name = name;
-    this.motion = motion;
   }
 
   // Methods
-  public void motionDetected(MotionDetector motion) {
-    setMotion(true);
-    System.out.println(motion.getName() + " -> detected motion");
+  public void motionDetected() {
+    if (isMotion()) {
+      System.out.println(this.getName() + " -> detected motion");
+    }
   }
 
   // Getters and Setters

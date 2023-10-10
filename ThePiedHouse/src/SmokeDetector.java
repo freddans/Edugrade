@@ -5,19 +5,18 @@ public class SmokeDetector {
   // Constructor
   public SmokeDetector(String name) {
     this.name = name;
-    this.smokeDetected = smokeDetected;
   }
 
   // Methods
-  public void theSmokeDetector(SmokeDetector smoke) {
+  public void theSmokeDetector() {
     smokeDetected = true;
-    System.out.println(smoke.getName() + " -> Smoke detected");
-    sprinklerSystem(smoke);
+    //System.out.println(this.getName() + " -> Smoke detected");
+    sprinklerSystem();
   }
 
-  public void sprinklerSystem(SmokeDetector smoke) {
+  public void sprinklerSystem() {
     if (smokeDetected) {
-      System.out.println(smoke.getName() + " -> Sprinklersystem started");
+      System.out.println(this.getName() + " -> Sprinklersystem started");
     }
   }
 

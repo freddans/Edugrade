@@ -1,21 +1,24 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+
 public class CentralUnit {
-  private boolean alarmOn = true;
-  private WindowDetector windowDetector;
-  private Siren siren;
+  private static boolean alarmOn = true;
+  private Siren sirens = new Siren();
 
   // Rooms
   private House house;
 
   // Constructor
-  public CentralUnit(House house) {
-    this.house = house;
+  public CentralUnit() {
+    this.house = new House();
   }
 
 
   // Methods
+
 
   // Menu
   public void menu() {
@@ -32,8 +35,8 @@ public class CentralUnit {
       System.out.println("7. Start random fire");
       System.out.println("8. Trigger random motion detector");
       System.out.println("9. Trigger random disaster");
-      System.out.println("10. Check room list");
-      System.out.println("12. Exit program");
+      System.out.println("10. Reset alarms");
+      System.out.println("11. Exit program");
 
       System.out.print("Input number: ");
       choice = sc.nextInt();
@@ -47,29 +50,49 @@ public class CentralUnit {
           }
           break;
         case 2:
+          house.openRandomWindow();
           if (alarmOn) {
-            house.openRandomWindow();
+            WindowDetector wd = house.checkWindowDetector();
+            if (wd != null) {
+              System.out.println("CentralUnit:  " + wd.getName() + " -> is open");
+            }
           } else {
             System.out.println("no alarm active");
           }
           break;
         case 3:
+          house.breakRandomWindow();
           if (alarmOn) {
-            house.breakRandomWindow();
+            WindowDetector wd = house.checkWindowDetector();
+            if (wd != null) {
+              System.out.println("CentralUnit:  " + wd.getName() + " -> is broken");
+              sirens.triggerSirens();
+            } else {
+              System.out.println("no window detected");
+            }
           } else {
             System.out.println("no alarm active");
           }
           break;
         case 4:
+          house.openRandomDoor();
           if (alarmOn) {
-            house.openRandomDoor();
+            DoorDetector dd = house.checkDoorDetector();
+            if (dd != null) {
+              System.out.println("CentralUnit:  " + dd.getName() + " -> is open");
+            }
           } else {
             System.out.println("no alarm active");
           }
           break;
         case 5:
+          house.breakRandomDoor();
           if (alarmOn) {
-            house.breakRandomDoor();
+            DoorAlarm da = house.checkDoorAlarm();
+            if (da != null) {
+              System.out.println("CentralUnit:  " + da.getName() + " -> is broken");
+              sirens.triggerSirens();
+            }
           } else {
             System.out.println("no alarm active");
           }
@@ -85,10 +108,20 @@ public class CentralUnit {
           break;
         case 7:
           house.triggerSmokeDetector();
+          SmokeDetector sd = house.checkSmokeDetector();
+          if (sd != null) {
+            System.out.println("CentralUnit:  " + sd.getName() + " -> smoke detected");
+            sirens.triggerSirens();
+            sd.sprinklerSystem();
+          }
           break;
         case 8:
+          house.triggerMotionDetector();
           if (alarmOn) {
-            house.triggerMotionDetector();
+            MotionDetector md = house.checkMotionDetector();
+            if (md != null) {
+              System.out.println(md.getName() + " -> motion detected");
+            }
           } else {
             System.out.println("no alarm active");
           }
@@ -111,26 +144,20 @@ public class CentralUnit {
           }
           break;
         case 10:
-          for (Room room : house.getRoomList()) {
-            for (int i = 0; i < room.getDooralarmList().size(); i++) {
-              System.out.println(room.getDooralarmList().get(i).getName());
-            }
-          }
-        case 12:
+          house.resetAlarms();
+          System.out.println("Alarm has been reset.");
+          break;
+        case 11:
           System.out.println("Exiting program");
           break;
         default:
-          System.out.println("Invalid number. Input number between 1-10 & 12.");
+          System.out.println("Invalid number. Input number between 1-10.");
       }
-    } while (choice != 12);
+    } while (choice != 11);
   }
 
   // Getters and Setters
-  public boolean isAlarmOn() {
+  public static boolean isAlarmOn() {
     return alarmOn;
-  }
-
-  public void setAlarmOn(boolean alarmOn) {
-    this.alarmOn = alarmOn;
   }
 }

@@ -5,15 +5,14 @@ public class DoorDetector {
   // Constructor
   public DoorDetector(String name) {
     this.name = name;
-    this.open = open;
   }
 
   // Methods
 
   // Open door
-  public void open(DoorDetector door) {
-    open = open;
-    System.out.println(door.getName() + " -> Door opened");
+  public void open() {
+    open = true;
+    //System.out.println(this.getName() + " -> Door opened");
   }
 
   // Getters and Setters
