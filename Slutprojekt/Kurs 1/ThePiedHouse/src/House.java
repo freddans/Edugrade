@@ -3,9 +3,8 @@ import java.util.List;
 import java.util.Random;
 
 public class House {
-  private String owner = "Erlich Bachman";
 
-  // Initialize Room object
+  // Initialize Random
   private Random random = new Random();
 
   // List of rooms
@@ -98,7 +97,7 @@ public class House {
     if (windowListSize > 0) {
       int windowIndex = random.nextInt(windowListSize);
       WindowDetector window = allDetectors.get(windowIndex);
-      window.setOpen(true);
+      window.setDetected(true);
     }
   }
 
@@ -131,7 +130,7 @@ public class House {
     if (doorDetectorListSize > 0) {
       int doorIndex = random.nextInt(doorDetectorListSize);
       DoorDetector door = allDetectors.get(doorIndex);
-      door.setOpen(true);
+      door.setDetected(true);
     }
   }
 
@@ -147,7 +146,7 @@ public class House {
     if (doorAlarmListSize > 0) {
       int doorIndex = random.nextInt(doorAlarmListSize);
       DoorAlarm door = allDetectors.get(doorIndex);
-      door.setBroken(true);
+      door.setDetected(true);
     }
   }
 
@@ -163,7 +162,7 @@ public class House {
     if (smokeDetectorListSize > 0) {
       int smokeIndex = random.nextInt(smokeDetectorListSize);
       SmokeDetector smoke = allDetectors.get(smokeIndex);
-      smoke.setSmokeDetected(true);
+      smoke.setDetected(true);
     } else {
       System.out.println("No smoke detectors available.");
     }
@@ -183,7 +182,7 @@ public class House {
     if (motionDetectorListSize > 0) {
       int motionIndex = random.nextInt(motionDetectorListSize);
       MotionDetector motion = allDetectors.get(motionIndex);
-      motion.setMotion(true);
+      motion.setDetected(true);
     }
   }
 
@@ -191,7 +190,7 @@ public class House {
   public boolean checkBackYardMotionDetector() {
     for (Room room : roomList) {
       if (room.getName().equalsIgnoreCase("backyard")) {
-        return room.getMotionDetectorList().get(0).isMotion();
+        return room.getMotionDetectorList().get(0).isDetected();
       }
     }
 
@@ -201,7 +200,7 @@ public class House {
   public void triggerBackYardMotionDetector() {
     for (Room room : roomList) {
       if (room.getName().equalsIgnoreCase("backyard")) {
-        room.getMotionDetectorList().get(0).setMotion(true);
+        room.getMotionDetectorList().get(0).setDetected(true);
       }
     }
   }
@@ -215,7 +214,7 @@ public class House {
     }
 
     for (MotionDetector detector : allDetectors) {
-      if (detector.isMotion()) {
+      if (detector.isDetected()) {
         return detector;
       }
     }
@@ -232,7 +231,7 @@ public class House {
     }
 
     for (WindowDetector detector : allDetectors) {
-      if (detector.isBroken() || detector.isOpen()) {
+      if (detector.isBroken() || detector.isDetected()) {
         return detector;
       }
     }
@@ -249,7 +248,7 @@ public class House {
     }
 
     for (DoorDetector detector : allDetectors) {
-      if (detector.isOpen()) {
+      if (detector.isDetected()) {
         return detector;
       }
     }
@@ -266,7 +265,7 @@ public class House {
     }
 
     for (SmokeDetector detector : allDetectors) {
-      if (detector.isSmokeDetected()) {
+      if (detector.isDetected()) {
         return detector;
       }
     }
@@ -283,7 +282,7 @@ public class House {
     }
 
     for (DoorAlarm detector : allDetectors) {
-      if (detector.isBroken()) {
+      if (detector.isDetected()) {
         return detector;
       }
     }
@@ -296,24 +295,24 @@ public class House {
 
     for (Room room : roomList) {
       for (MotionDetector motionDetector : room.getMotionDetectorList()) {
-        motionDetector.setMotion(false);
+        motionDetector.setDetected(false);
       }
 
       for (WindowDetector windowDetector : room.getWindowDetectorList()) {
         windowDetector.setBroken(false);
-        windowDetector.setOpen(false);
+        windowDetector.setDetected(false);
       }
 
       for (DoorDetector doorDetector : room.getDoorDetectorList()) {
-        doorDetector.setOpen(false);
+        doorDetector.setDetected(false);
       }
 
       for (DoorAlarm doorAlarm : room.getDooralarmList()) {
-        doorAlarm.setBroken(false);
+        doorAlarm.setDetected(false);
       }
 
       for (SmokeDetector smokeDetector : room.getSmokeDetectorList()) {
-        smokeDetector.setSmokeDetected(false);
+        smokeDetector.setDetected(false);
       }
     }
   }

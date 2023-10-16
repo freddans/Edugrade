@@ -1,22 +1,19 @@
-public class MotionDetector {
-  private String name;
-  private boolean motion = false;
+public class MotionDetector extends Room implements Detector {
+  private boolean detected = false;
 
   // Constructor
   public MotionDetector(String name) {
-    this.name = name;
+    super(name);
+  }
+
+  // interface implemented setDetected
+  @Override
+  public void setDetected(boolean detected) {
+    this.detected = detected;
   }
 
   // Getters and Setters
-  public String getName() {
-    return name;
-  }
-
-  public boolean isMotion() {
-    return motion;
-  }
-
-  public void setMotion(boolean motion) {
-    this.motion = motion;
+  public boolean isDetected() {
+    return detected;
   }
 }

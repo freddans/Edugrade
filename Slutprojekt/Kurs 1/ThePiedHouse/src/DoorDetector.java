@@ -1,22 +1,19 @@
-public class DoorDetector {
-  private String name;
-  private boolean open = false;
+public class DoorDetector extends Room implements Detector {
+  private boolean detected = false;
 
-  // Constructor
+  // Constructor (Heritage)
   public DoorDetector(String name) {
-    this.name = name;
+    super(name);
+  }
+
+  // interface implemented setDetected
+  @Override
+  public void setDetected(boolean detected) {
+    this.detected = detected;
   }
 
   // Getters and Setters
-  public String getName() {
-    return name;
-  }
-
-  public boolean isOpen() {
-    return open;
-  }
-
-  public void setOpen(boolean open) {
-    this.open = open;
+  public boolean isDetected() {
+    return detected;
   }
 }

@@ -1,29 +1,26 @@
-public class SmokeDetector {
-  private String name;
-  private boolean smokeDetected = false;
+public class SmokeDetector extends Room implements Detector {
+  private boolean detected = false;
 
-  // Constructor
+  // Constructor (Heritage)
   public SmokeDetector(String name) {
-    this.name = name;
+    super(name);
   }
 
   // Methods
   public void sprinklerSystem() {
-    if (smokeDetected) {
-      System.out.println(this.getName() + " -> Sprinklersystem started");
+    if (detected) {
+      System.out.println(super.getName() + " -> Sprinklersystem started");
     }
   }
 
+  // interface implemented setDetected
+  @Override
+  public void setDetected(boolean detected) {
+    this.detected = detected;
+  }
+
   // Getters and Setters
-  public String getName() {
-    return name;
-  }
-
-  public boolean isSmokeDetected() {
-    return smokeDetected;
-  }
-
-  public void setSmokeDetected(boolean smokeDetected) {
-    this.smokeDetected = smokeDetected;
+  public boolean isDetected() {
+    return detected;
   }
 }

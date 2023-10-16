@@ -15,7 +15,6 @@ public class Room {
   // Constructor
   public Room(String name) {
     this.name = name;
-    this.secretDocuments = secretDocuments;
   }
 
   // Methods

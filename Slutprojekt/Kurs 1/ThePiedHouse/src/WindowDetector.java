@@ -1,23 +1,22 @@
-public class WindowDetector {
-  private String name;
-  private boolean open = false;
+public class WindowDetector extends Room implements Detector {
+  private boolean detected = false;
   private boolean broken = false;
 
+
+  // Constructor (Heritage)
   public WindowDetector(String name) {
-    this.name = name;
+    super(name);
+  }
+
+  // interface implemented setDetected
+  @Override
+  public void setDetected(boolean detected) {
+    this.detected = detected;
   }
 
   // Getters and Setters
-  public String getName() {
-    return name;
-  }
-
-  public boolean isOpen() {
-    return open;
-  }
-
-  public void setOpen(boolean open) {
-    this.open = open;
+  public boolean isDetected() {
+    return detected;
   }
 
   public boolean isBroken() {
