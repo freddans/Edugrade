@@ -1,9 +1,6 @@
 package alarmsystem.detectors.parts;
 
-import alarmsystem.detectors.Detector;
-import alarmsystem.detectors.Notification;
-
-public class MotionDetector extends Detector implements Notification {
+public class MotionDetector extends Detector {
   // Attributes
   private boolean detected = false;
 
@@ -16,10 +13,15 @@ public class MotionDetector extends Detector implements Notification {
   @Override
   public void notification() {
     if (detected) {
-      System.out.println(super.getName() + " -> motion detected");
+      System.out.println("📳 "+ super.getName() + " -> motion detected");
     } else {
       System.out.println("No detection");
     }
+  }
+
+  @Override
+  public void resetDetector() {
+    this.detected = false;
   }
 
   // Getters and Setters

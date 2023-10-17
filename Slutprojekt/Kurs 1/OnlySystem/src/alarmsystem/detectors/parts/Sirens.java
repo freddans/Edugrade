@@ -8,10 +8,10 @@ public class Sirens {
   }
 
   private void sirenOne() {
-    System.out.println("TJUUUUUUUT");
+    System.out.println("🎺 TJUUUUUUUT 🎺");
   }
 
   private void sirenTwo() {
-    System.out.println("TJUUUUUUUT");
+    System.out.println("🎺 TJUUUUUUUT 🎺");
   }
 }

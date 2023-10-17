@@ -1,9 +1,6 @@
 package alarmsystem.detectors.parts;
 
-import alarmsystem.detectors.Detector;
-import alarmsystem.detectors.Notification;
-
-public class SmokeDetector extends Detector implements Notification {
+public class SmokeDetector extends Detector {
   // Attributes
   private boolean detected = false;
   private Sirens sirens = new Sirens();
@@ -17,7 +14,7 @@ public class SmokeDetector extends Detector implements Notification {
   @Override
   public void notification() {
     if (detected) {
-      System.out.println(super.getName() + " -> smoke detected");
+      System.out.println("💨 " + super.getName() + " -> smoke detected");
       sirens.triggerSirens();
       sprinklerSystem();
     } else {
@@ -25,9 +22,14 @@ public class SmokeDetector extends Detector implements Notification {
     }
   }
 
+  @Override
+  public void resetDetector() {
+    this.detected = false;
+  }
+
   public void sprinklerSystem() {
     if (detected) {
-      System.out.println(super.getName() + " -> sprinklersystem started");
+      System.out.println("🚿 " + super.getName() + " -> sprinklersystem started");
     }
   }
 

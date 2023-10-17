@@ -1,9 +1,6 @@
 package alarmsystem.detectors.parts;
 
-import alarmsystem.detectors.Detector;
-import alarmsystem.detectors.Notification;
-
-public class DoorAlarm extends Detector implements Notification {
+public class DoorAlarm extends Detector {
   // Attributes
   private boolean detected = false;
   private Sirens sirens = new Sirens();
@@ -17,10 +14,15 @@ public class DoorAlarm extends Detector implements Notification {
   @Override
   public void notification() {
     if (detected) {
-      System.out.println(super.getName() + " -> has broken");
+      System.out.println("🚪 " + super.getName() + " -> has broken");
       sirens.triggerSirens();
     }
     System.out.println("No detection");
+  }
+
+  @Override
+  public void resetDetector() {
+    this.detected = false;
   }
 
   // Getters and Setters

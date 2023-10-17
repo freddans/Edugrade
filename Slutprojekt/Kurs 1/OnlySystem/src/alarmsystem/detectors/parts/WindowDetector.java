@@ -1,9 +1,6 @@
 package alarmsystem.detectors.parts;
 
-import alarmsystem.detectors.Detector;
-import alarmsystem.detectors.Notification;
-
-public class WindowDetector extends Detector implements Notification {
+public class WindowDetector extends Detector {
   // Attributes
   private boolean detected = false;
   private boolean broken = false;
@@ -18,7 +15,7 @@ public class WindowDetector extends Detector implements Notification {
   @Override
   public void notification() {
     if (detected) {
-      System.out.println(super.getName() + " -> has opened");
+      System.out.println("🪟 " + super.getName() + " -> has opened");
     } else {
       System.out.println("No detection");
     }
@@ -26,9 +23,15 @@ public class WindowDetector extends Detector implements Notification {
 
   public void broken() {
     if (broken) {
-      System.out.println(super.getName() + " -> has broken");
+      System.out.println("🪟 " + super.getName() + " -> has broken");
       sirens.triggerSirens();
     }
+  }
+
+  @Override
+  public void resetDetector() {
+    this.detected = false;
+    this.broken = false;
   }
 
   // Getters and setters
